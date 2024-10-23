@@ -1,5 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Codificar Mensagem</h2>
+    <div class="titulo">
+        <h2>Codificar Mensagem</h2>
+    </div>
+
+    <div class="form">
+        <form action="/codificar" method="post">
+            <label for="mensagem">Digite a mensagem a ser codificada:</label>
+            <input type="text" name="mensagem" required>
+            <label for="imagem">Escolha a imagem (PNG):</label>
+            <input type="file" name="imagem" accept="image/png" required>
+            <input type="submit" value="Codificar">
+        </form>
+        <div class="encoded_image">
+            {% if image_data %}
+            <h2>Imagem gerada com sucesso!</h2>
+            <img src="data:image/png;" alt="">
+        </div>
+    </div>
 {% endblock %}
