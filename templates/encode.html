@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="title">
+        <h2>Codificar Mensagem</h2>
+    </div>
+
+    <div class="form">
+        <form action="/encode" method="post" enctype="multipart/form-data">
+            <label for="message">Digite a mensagem a ser codificada:</label>
+            <input type="text" name="message" required>
+            <label for="imagem">Escolha a imagem (PNG):</label>
+            <input type="file" name="image" accept="image/png" required>
+            <input type="submit" value="Codificar">
+        </form>
+    </div>
+
+    <div class="encoded_image">
+        {% if image_data %}
+            <h2>Imagem gerada com sucesso!</h2>
+            <img
+                src="data:image/png;base64, {{ image_data|b64encode }}"
+                alt="Imagem Codificada"
+            >
+            <br />
+            <a
+                href="data:image/png;base64, {{ image_data|b64encode }}"
+                download="{{ img_filename }}"
+            >
+                <button>
+                    Baixar Imagem Codificada
+                </button>
+            </a>
+        {% endif %}
+    </div>
+{% endblock %}
